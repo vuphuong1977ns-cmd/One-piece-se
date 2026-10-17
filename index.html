@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+    <meta name="theme-color" content="#102b42">
+
+    <title>ONE PIECE: NEW WORLD</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+    <h1>🏴‍☠️ ONE PIECE: NEW WORLD</h1>
+    <p>Hành trình trở thành Vua Hải Tặc!</p>
+</header>
+
+<!-- THÔNG TIN NHÂN VẬT -->
+<section id="stats">
+
+    <div class="stat">
+        <span>CẤP ĐỘ</span>
+        <b id="level">1</b>
+    </div>
+
+    <div class="stat">
+        <span>HP</span>
+        <b id="hpText">100 / 100</b>
+        <div class="bar">
+            <i id="hpBar"></i>
+        </div>
+    </div>
+
+    <div class="stat">
+        <span>EXP</span>
+        <b id="expText">0 / 50</b>
+        <div class="bar">
+            <i id="expBar"></i>
+        </div>
+    </div>
+
+    <div class="stat">
+        <span>BELI</span>
+        <b id="beli">0 ฿</b>
+    </div>
+
+</section>
+
+<main>
+
+    <!-- KHU VỰC CHƠI -->
+    <section class="game-panel">
+
+        <div class="island-header">
+            <h2 id="islandName">Đảo Khởi Đầu</h2>
+            <p id="zoneText">Biển Đông</p>
+        </div>
+
+        <div id="gameViewport">
+
+            <canvas
+                id="gameCanvas"
+                width="960"
+                height="540">
+            </canvas>
+
+            <div id="canvasHint">
+                Chào mừng đến với thế giới hải tặc!
+            </div>
+
+        </div>
+
+        <!-- NÚT ĐIỀU KHIỂN -->
+        <div class="controls">
+
+            <div class="movement">
+
+                <button data-move="up">⬆️</button>
+
+                <div>
+                    <button data-move="left">⬅️</button>
+                    <button data-move="down">⬇️</button>
+                    <button data-move="right">➡️</button>
+                </div>
+
+            </div>
+
+            <div class="combat-controls">
+
+                <button id="attackBtn">
+                    👊 Đánh
+                </button>
+
+                <button id="skillZ">
+                    🔥 Chiêu Z
+                </button>
+
+                <button id="skillX">
+                    💥 Chiêu X
+                </button>
+
+                <button id="skillC">
+                    ⚡ Chiêu C
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- HÀNH ĐỘNG -->
+        <div class="actions">
+
+            <button id="interactBtn">
+                💬 Tương tác
+            </button>
+
+            <button id="boatBtn">
+                🚢 Đi thuyền
+            </button>
+
+            <button id="healBtn">
+                🍖 Hồi máu
+            </button>
+
+            <button id="saveBtn">
+                💾 Lưu game
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- BẢNG THÔNG TIN -->
+    <aside class="sidebar">
+
+        <!-- NHIỆM VỤ -->
+        <section class="card">
+
+            <h2>📜 Nhiệm vụ</h2>
+
+            <h3 id="questTitle">
+                Tập làm hải tặc
+            </h3>
+
+            <p id="questDescription">
+                Đánh bại 3 tên cướp biển.
+            </p>
+
+            <p id="questProgress">
+                Tiến độ: 0 / 3
+            </p>
+
+            <button id="questBtn">
+                Xem nhiệm vụ
+            </button>
+
+        </section>
+
+        <!-- TRÁI ÁC QUỶ -->
+        <section class="card">
+
+            <h2>🍈 Trái ác quỷ</h2>
+
+            <div id="fruitIcon">🥊</div>
+
+            <h3 id="fruitName">
+                Chưa ăn trái
+            </h3>
+
+            <p id="fruitDescription">
+                Bạn đang chiến đấu bằng tay không.
+            </p>
+
+            <button id="fruitShopBtn">
+                🛒 Cửa hàng trái
+            </button>
+
+        </section>
+
+        <!-- TÚI ĐỒ -->
+        <section class="card">
+
+            <h2>🎒 Túi đồ</h2>
+
+            <p>🗡️ Kiếm gỗ:
+                <b id="swordStatus">Đã trang bị</b>
+            </p>
+
+            <p>🍖 Thịt:
+                <b id="meatCount">3</b>
+            </p>
+
+            <p>🏝️ Đảo đã mở:
+                <b id="islandCount">1 / 7</b>
+            </p>
+
+        </section>
+
+        <!-- NHẬT KÝ -->
+        <section class="card">
+
+            <h2>📢 Nhật ký</h2>
+
+            <div id="log"></div>
+
+        </section>
+
+    </aside>
+
+</main>
+
+<!-- BẢN ĐỒ -->
+<section id="mapPanel" class="overlay hidden">
+
+    <div class="dialog">
+
+        <button id="closeMap" class="close-btn">
+            ✖
+        </button>
+
+        <h2>🗺️ Bản đồ thế giới</h2>
+
+        <div id="islandList"></div>
+
+    </div>
+
+</section>
+
+<!-- NPC / CỬA HÀNG -->
+<section id="dialogPanel" class="overlay hidden">
+
+    <div class="dialog">
+
+        <button id="closeDialog" class="close-btn">
+            ✖
+        </button>
+
+        <h2 id="dialogTitle">
+            Nhân vật
+        </h2>
+
+        <div id="dialogContent"></div>
+
+    </div>
+
+</section>
+
+<footer>
+    ONE PIECE: NEW WORLD — Phiên bản phát triển
+</footer>
+
+<script src="game.js"></script>
+
+</body>
+  </html>
